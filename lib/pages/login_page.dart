@@ -17,6 +17,20 @@ class _LogInPageState extends State<LogInPage> {
   bool notVisible = true;
   bool loggedIn = false;
 
+  void _validate() {
+    final form = _formKey.currentState;
+    if (form != null && form.validate()) {
+      setState(() {
+        loggedIn = true;
+        email = _emailController.text;
+        password = _passwordController.text;
+      });
+    }
+  }
+
+  String? email;
+  String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +134,7 @@ class _LogInPageState extends State<LogInPage> {
                 ),
               ],
             ),
-            MyButton(title: 'Login', onTap: () {}),
+            MyButton(title: 'Login', onTap: _validate),
           ],
         ),
       ),
