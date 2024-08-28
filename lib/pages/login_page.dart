@@ -106,6 +106,17 @@ class _LogInPageState extends State<LogInPage> {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
+                  validator: (text) {
+                    if (text!.isEmpty) {
+                      return 'Enter password';
+                    }
+
+                    if (text.length < 8) {
+                      return 'Password must be at least 8 characters long';
+                    }
+
+                    return null;
+                  },
                 ),
               ],
             ),
