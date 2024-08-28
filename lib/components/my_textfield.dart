@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   final String? labelText;
   final TextEditingController titleController;
-  const MyTextField({super.key, this.labelText, required this.titleController});
+  final Widget? suffixWidget;
+  final bool obscureText;
+  String? Function(String?)? validator;
+  TextInputType? keyboardType;
+  MyTextField({
+    super.key,
+    this.labelText,
+    required this.titleController,
+    this.suffixWidget,
+    required this.obscureText,
+    this.validator,
+    this.keyboardType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +40,15 @@ class MyTextField extends StatelessWidget {
         ),
         isDense: true,
         labelText: labelText,
+        suffix: suffixWidget,
         labelStyle:
             const TextStyle(letterSpacing: 1, fontWeight: FontWeight.w400),
         filled: true,
         fillColor: Colors.grey.shade100,
       ),
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      validator: validator,
     );
   }
 }
