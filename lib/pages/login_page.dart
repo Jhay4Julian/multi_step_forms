@@ -73,6 +73,20 @@ class _LogInPageState extends State<LogInPage> {
                   titleController: _emailController,
                   labelText: 'Email',
                   keyboardType: TextInputType.emailAddress,
+                  validator: (text) {
+                    if (text!.isEmpty) {
+                      return 'Enter email address';
+                    }
+
+                    final regex = RegExp(
+                        r'^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+
+                    if (!regex.hasMatch(text)) {
+                      return 'Enter a valid email';
+                    }
+
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 20),
 
