@@ -37,16 +37,19 @@ class _SignUpPageState extends State<SignUpPage> {
               Column(
                 children: [
                   MyTextField(
+                    obscureText: false,
                     titleController: _emailController,
                     labelText: 'Email',
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
+                    obscureText: true,
                     titleController: _passwordController,
                     labelText: 'Password',
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
+                    obscureText: true,
                     titleController: _confirmPasswordController,
                     labelText: 'Confirm Password',
                   ),
