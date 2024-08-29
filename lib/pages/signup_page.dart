@@ -43,7 +43,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   MyTextField(
                     titleController: _emailController,
                     labelText: 'Email',
+                    keyboardType: TextInputType.emailAddress,
                     obscureText: false,
+                    validator: (text) {
+                      if (text!.isEmpty) {
+                        return 'Enter an email address';
+                      }
+
+                      final regex = RegExp(
+                          r'^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+
+                      if (!regex.hasMatch(text)) {
+                        return 'Enter a valid email';
+                      }
+
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
