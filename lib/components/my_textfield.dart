@@ -5,7 +5,7 @@ class MyTextField extends StatelessWidget {
   final String? labelText;
   final TextEditingController titleController;
   final Widget? suffixWidget;
-  final bool obscureText;
+  bool obscureText;
   String? Function(String?)? validator;
   TextInputType? keyboardType;
   MyTextField({
@@ -13,7 +13,7 @@ class MyTextField extends StatelessWidget {
     this.labelText,
     required this.titleController,
     this.suffixWidget,
-    required this.obscureText,
+    this.obscureText = false,
     this.validator,
     this.keyboardType,
   });
