@@ -76,6 +76,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
+                    validator: (text) {
+                      if (text!.isEmpty) {
+                        return 'Enter password';
+                      }
+
+                      if (text.contains(' ')) {
+                        return 'Password can not include whitespaces';
+                      }
+
+                      if (text.length < 8) {
+                        return 'Password must be at least 8 characters';
+                      }
+
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
