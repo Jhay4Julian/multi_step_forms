@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
@@ -15,11 +14,16 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isHidden = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Form(
+        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -37,15 +41,26 @@ class _SignUpPageState extends State<SignUpPage> {
               Column(
                 children: [
                   MyTextField(
-                    obscureText: false,
                     titleController: _emailController,
                     labelText: 'Email',
+                    obscureText: false,
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
-                    obscureText: true,
                     titleController: _passwordController,
                     labelText: 'Password',
+                    obscureText: isHidden,
+                    suffixWidget: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isHidden = !isHidden;
+                        });
+                      },
+                      child: Icon(
+                        isHidden ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   MyTextField(
