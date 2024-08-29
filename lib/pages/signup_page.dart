@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_step_forms/details.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
@@ -17,6 +18,22 @@ class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isHidden = true;
+
+  // Validate Form
+  void _validateSignUp() {
+    final form = _formKey.currentState;
+    if (form != null && form.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailsPage(
+            email: _emailController.text,
+            password: _passwordController.text,
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ],
               ),
-              MyButton(title: 'Sign Up', onTap: () {})
+              MyButton(title: 'Sign Up', onTap: _validateSignUp)
             ],
           ),
         ),
