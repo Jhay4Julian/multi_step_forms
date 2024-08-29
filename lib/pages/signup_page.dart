@@ -97,6 +97,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     titleController: _confirmPasswordController,
                     labelText: 'Confirm Password',
+                    validator: (text) {
+                      if (_passwordController.text !=
+                          _confirmPasswordController.text) {
+                        return 'Passwords do not match';
+                      }
+
+                      return null;
+                    },
                   ),
                 ],
               ),
