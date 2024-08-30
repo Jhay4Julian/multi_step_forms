@@ -24,6 +24,34 @@ class _RegisterPageState extends State<RegisterPage> {
           SchoolInfoPage(formKey: _schoolFormKey),
         ],
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: BottomAppBar(
+          elevation: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Continue',
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
