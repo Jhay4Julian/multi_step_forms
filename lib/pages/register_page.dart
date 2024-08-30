@@ -14,11 +14,33 @@ class _RegisterPageState extends State<RegisterPage> {
   final _profileFormKey = GlobalKey<FormState>();
   final _schoolFormKey = GlobalKey<FormState>();
 
+  int _currentPage = 0;
+
+  // go to next page
+  void _nextPage() {
+    if ((_currentPage == 0 && _profileFormKey.currentState!.validate()) ||
+        (_currentPage == 1 && _schoolFormKey.currentState!.validate())) {
+      _pageController.nextPage(
+          duration: const Duration(microseconds: 300), curve: Curves.ease);
+    }
+  }
+
+  // go to previous page
+  void _previousPage() {
+    _pageController.previousPage(
+        duration: const Duration(microseconds: 300), curve: Curves.ease);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _currentPage = index;
+          });
+        },
         children: [
           PersonalInfoPage(formKey: _profileFormKey),
           SchoolInfoPage(formKey: _schoolFormKey),
