@@ -19,6 +19,7 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: widget.formKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
