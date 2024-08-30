@@ -53,23 +53,26 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(fontSize: 17),
+              _currentPage > 0
+                  ? IconButton(
+                      onPressed: _previousPage,
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              if (_currentPage < 2)
+                ElevatedButton(
+                  onPressed: _nextPage,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(fontSize: 17),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
