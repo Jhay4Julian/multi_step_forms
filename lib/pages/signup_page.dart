@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_step_forms/details.dart';
+import 'package:multi_step_forms/pages/register_page.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
@@ -11,10 +11,12 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController =
+      TextEditingController(text: 'default@email.com');
+  final TextEditingController _passwordController =
+      TextEditingController(text: 'Password123');
   final TextEditingController _confirmPasswordController =
-      TextEditingController();
+      TextEditingController(text: 'Password123');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isHidden = true;
@@ -23,15 +25,8 @@ class _SignUpPageState extends State<SignUpPage> {
   void _validateSignUp() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetailsPage(
-            email: _emailController.text,
-            password: _passwordController.text,
-          ),
-        ),
-      );
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const RegisterPage()));
     }
   }
 
