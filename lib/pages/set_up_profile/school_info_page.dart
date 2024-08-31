@@ -20,63 +20,77 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: widget.formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Education',
-                style: TextStyle(fontSize: 20, letterSpacing: 1),
-              ),
-              const SizedBox(height: 50),
-
-              //
-              MyTextField(
-                titleController: _universityController,
-                labelText: 'Institution',
-                validator: (text) => text!.isEmpty ? 'Required' : null,
-                onSaved: (value) {
-                  widget.onSaved(value, null, null, null);
-                },
-              ),
-              const SizedBox(height: 15),
-
-              //
-              MyTextField(
-                titleController: _courseController,
-                labelText: 'Course',
-                validator: (text) => text!.isEmpty ? 'Required' : null,
-                onSaved: (value) {
-                  widget.onSaved(null, value, null, null);
-                },
-              ),
-              const SizedBox(height: 15),
-
-              //
-              MyTextField(
-                titleController: _levelController,
-                labelText: 'Level',
-                validator: (text) => text!.isEmpty ? 'Required' : null,
-                onSaved: (value) {
-                  widget.onSaved(null, null, value, null);
-                },
-              ),
-              const SizedBox(height: 15),
-
-              //
-              MyTextField(
-                titleController: _matricController,
-                labelText: 'Matric Number',
-                validator: (text) => text!.isEmpty ? 'Required' : null,
-                onSaved: (value) {
-                  widget.onSaved(null, null, null, value);
-                },
-              )
-            ],
+      body: SafeArea(
+        child: Form(
+          key: widget.formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Education',
+                  style: TextStyle(fontSize: 20, letterSpacing: 1),
+                ),
+                const SizedBox(height: 50),
+                MyTextField(
+                  titleController: _universityController,
+                  labelText: 'Institution',
+                  validator: (text) => text!.isEmpty ? 'Required' : null,
+                  onSaved: (value) {
+                    widget.onSaved(
+                      value,
+                      _courseController.text,
+                      _levelController.text,
+                      _matricController.text,
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                MyTextField(
+                  titleController: _courseController,
+                  labelText: 'Course',
+                  validator: (text) => text!.isEmpty ? 'Required' : null,
+                  onSaved: (value) {
+                    widget.onSaved(
+                      _universityController.text,
+                      value,
+                      _levelController.text,
+                      _matricController.text,
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                MyTextField(
+                  titleController: _levelController,
+                  labelText: 'Level',
+                  validator: (text) => text!.isEmpty ? 'Required' : null,
+                  onSaved: (value) {
+                    widget.onSaved(
+                      _universityController.text,
+                      _courseController.text,
+                      value,
+                      _matricController.text,
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                MyTextField(
+                  titleController: _matricController,
+                  labelText: 'Matric Number',
+                  validator: (text) => text!.isEmpty ? 'Required' : null,
+                  onSaved: (value) {
+                    widget.onSaved(
+                      _universityController.text,
+                      _courseController.text,
+                      _levelController.text,
+                      value,
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

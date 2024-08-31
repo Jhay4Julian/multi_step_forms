@@ -21,80 +21,96 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: widget.formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                'Profile',
-                style: TextStyle(fontSize: 20, letterSpacing: 1),
-              ),
-              const SizedBox(height: 50),
+      body: SafeArea(
+        child: Form(
+          key: widget.formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  'Profile',
+                  style: TextStyle(fontSize: 20, letterSpacing: 1),
+                ),
+                const SizedBox(height: 50),
+                MyTextField(
+                  titleController: _firstNameController,
+                  labelText: 'First Name',
+                  validator: (text) {
+                    if (text!.isEmpty) {
+                      return 'Required';
+                    }
 
-              // FIRST NAME
-              MyTextField(
-                titleController: _firstNameController,
-                labelText: 'First Name',
-                validator: (text) {
-                  if (text!.isEmpty) {
-                    return 'Required';
-                  }
-
-                  return null;
-                },
-                onSaved: (value) {
-                  widget.onSaved(value, null, null, null);
-                },
-              ),
-              const SizedBox(height: 15),
-
-              // LAST NAME
-              MyTextField(
-                titleController: _lastNameController,
-                labelText: 'Last Name',
-                validator: (text) => text!.isEmpty ? 'Required' : null,
-                onSaved: (value) {
-                  widget.onSaved(null, value, null, null);
-                },
-              ),
-              const SizedBox(height: 15),
-
-              // GENDER & AGE
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // AGE
-                  SizedBox(
-                    width: 80,
-                    child: MyTextField(
-                      titleController: _ageController,
-                      labelText: 'Age',
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      validator: (text) => text!.isEmpty ? 'Required' : null,
-                      onSaved: (value) {
-                        widget.onSaved(null, null, value, null);
-                      },
+                    return null;
+                  },
+                  onSaved: (value) {
+                    widget.onSaved(
+                      value,
+                      _lastNameController.text,
+                      _ageController.text,
+                      _genderController.text,
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                MyTextField(
+                  titleController: _lastNameController,
+                  labelText: 'Last Name',
+                  validator: (text) => text!.isEmpty ? 'Required' : null,
+                  onSaved: (value) {
+                    widget.onSaved(
+                      _firstNameController.text,
+                      value,
+                      _ageController.text,
+                      _genderController.text,
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: MyTextField(
+                        titleController: _ageController,
+                        labelText: 'Age',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        validator: (text) => text!.isEmpty ? 'Required' : null,
+                        onSaved: (value) {
+                          widget.onSaved(
+                            _firstNameController.text,
+                            _lastNameController.text,
+                            value,
+                            _genderController.text,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 50),
-                  // GENDER
-                  Expanded(
-                    child: MyTextField(
-                      titleController: _genderController,
-                      labelText: 'Gender',
-                      validator: (text) => text!.isEmpty ? 'Required' : null,
-                      onSaved: (value) {
-                        widget.onSaved(null, null, null, value);
-                      },
+                    const SizedBox(width: 50),
+                    Expanded(
+                      child: MyTextField(
+                        titleController: _genderController,
+                        labelText: 'Gender',
+                        validator: (text) => text!.isEmpty ? 'Required' : null,
+                        onSaved: (value) {
+                          widget.onSaved(
+                            _firstNameController.text,
+                            _lastNameController.text,
+                            _ageController.text,
+                            value,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
