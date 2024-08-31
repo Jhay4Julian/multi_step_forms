@@ -3,7 +3,9 @@ import 'package:multi_step_forms/components/my_textfield.dart';
 
 class SchoolInfoPage extends StatefulWidget {
   final GlobalKey formKey;
-  const SchoolInfoPage({super.key, required this.formKey});
+  final Function(String?, String?, String?, String?) onSaved;
+  const SchoolInfoPage(
+      {super.key, required this.formKey, required this.onSaved});
 
   @override
   State<SchoolInfoPage> createState() => _SchoolInfoPageState();
@@ -37,6 +39,9 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
                 titleController: _universityController,
                 labelText: 'Institution',
                 validator: (text) => text!.isEmpty ? 'Required' : null,
+                onSaved: (value) {
+                  widget.onSaved(value, null, null, null);
+                },
               ),
               const SizedBox(height: 15),
 
@@ -45,6 +50,9 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
                 titleController: _courseController,
                 labelText: 'Course',
                 validator: (text) => text!.isEmpty ? 'Required' : null,
+                onSaved: (value) {
+                  widget.onSaved(null, value, null, null);
+                },
               ),
               const SizedBox(height: 15),
 
@@ -53,6 +61,9 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
                 titleController: _levelController,
                 labelText: 'Level',
                 validator: (text) => text!.isEmpty ? 'Required' : null,
+                onSaved: (value) {
+                  widget.onSaved(null, null, value, null);
+                },
               ),
               const SizedBox(height: 15),
 
@@ -61,6 +72,9 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
                 titleController: _matricController,
                 labelText: 'Matric Number',
                 validator: (text) => text!.isEmpty ? 'Required' : null,
+                onSaved: (value) {
+                  widget.onSaved(null, null, null, value);
+                },
               )
             ],
           ),

@@ -4,7 +4,9 @@ import 'package:multi_step_forms/components/my_textfield.dart';
 
 class PersonalInfoPage extends StatefulWidget {
   final GlobalKey formKey;
-  const PersonalInfoPage({super.key, required this.formKey});
+  final Function(String?, String?, String?, String?) onSaved;
+  const PersonalInfoPage(
+      {super.key, required this.formKey, required this.onSaved});
 
   @override
   State<PersonalInfoPage> createState() => _PersonalInfoPageState();
@@ -44,6 +46,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
 
                   return null;
                 },
+                onSaved: (value) {
+                  widget.onSaved(value, null, null, null);
+                },
               ),
               const SizedBox(height: 15),
 
@@ -52,6 +57,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 titleController: _lastNameController,
                 labelText: 'Last Name',
                 validator: (text) => text!.isEmpty ? 'Required' : null,
+                onSaved: (value) {
+                  widget.onSaved(null, value, null, null);
+                },
               ),
               const SizedBox(height: 15),
 
@@ -67,6 +75,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       labelText: 'Age',
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (text) => text!.isEmpty ? 'Required' : null,
+                      onSaved: (value) {
+                        widget.onSaved(null, null, value, null);
+                      },
                     ),
                   ),
                   const SizedBox(width: 50),
@@ -76,6 +87,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       titleController: _genderController,
                       labelText: 'Gender',
                       validator: (text) => text!.isEmpty ? 'Required' : null,
+                      onSaved: (value) {
+                        widget.onSaved(null, null, null, value);
+                      },
                     ),
                   ),
                 ],
