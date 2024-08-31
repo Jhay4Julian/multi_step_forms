@@ -10,6 +10,7 @@ class MyTextField extends StatelessWidget {
   String? Function(String?)? validator;
   TextInputType? keyboardType;
   List<TextInputFormatter>? inputFormatters;
+  void Function(String?)? onSaved;
   MyTextField({
     super.key,
     this.labelText,
@@ -19,6 +20,7 @@ class MyTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.inputFormatters,
+    this.onSaved,
   });
 
   @override
@@ -53,6 +55,7 @@ class MyTextField extends StatelessWidget {
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       validator: validator,
+      onSaved: onSaved,
     );
   }
 }
