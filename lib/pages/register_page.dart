@@ -15,6 +15,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final _profileFormKey = GlobalKey<FormState>();
   final _schoolFormKey = GlobalKey<FormState>();
 
+  // controllers
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+
+  final TextEditingController _institutionController = TextEditingController();
+  final TextEditingController _courseController = TextEditingController();
+  final TextEditingController _levelController = TextEditingController();
+  final TextEditingController _matricNumberController = TextEditingController();
+
   int _currentPage = 0;
 
   // go to next page
@@ -61,6 +72,10 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           PersonalInfoPage(
               formKey: _profileFormKey,
+              firstNameController: _firstNameController,
+              lastNameController: _lastNameController,
+              ageController: _ageController,
+              genderController: _genderController,
               onSaved: (firstNameValue, lastNameValue, ageValue, genderValue) {
                 firstName = firstNameValue;
                 lastName = lastNameValue;
@@ -69,6 +84,10 @@ class _RegisterPageState extends State<RegisterPage> {
               }),
           SchoolInfoPage(
             formKey: _schoolFormKey,
+            institutionController: _institutionController,
+            courseController: _courseController,
+            levelController: _levelController,
+            matricController: _matricNumberController,
             onSaved:
                 (institutionValue, courseValue, levelValue, matricNumberValue) {
               institution = institutionValue;
@@ -84,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
             gender: gender ?? '',
             institution: institution ?? '',
             course: course ?? '',
-            level: lastName ?? '',
+            level: level ?? '',
             matricNumber: matricNumber ?? '',
           ),
         ],

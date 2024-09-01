@@ -3,20 +3,25 @@ import 'package:multi_step_forms/components/my_textfield.dart';
 
 class SchoolInfoPage extends StatefulWidget {
   final GlobalKey formKey;
+  final TextEditingController institutionController;
+  final TextEditingController courseController;
+  final TextEditingController levelController;
+  final TextEditingController matricController;
   final Function(String?, String?, String?, String?) onSaved;
   const SchoolInfoPage(
-      {super.key, required this.formKey, required this.onSaved});
+      {super.key,
+      required this.formKey,
+      required this.institutionController,
+      required this.courseController,
+      required this.levelController,
+      required this.matricController,
+      required this.onSaved});
 
   @override
   State<SchoolInfoPage> createState() => _SchoolInfoPageState();
 }
 
 class _SchoolInfoPageState extends State<SchoolInfoPage> {
-  final _universityController = TextEditingController();
-  final _courseController = TextEditingController();
-  final _levelController = TextEditingController();
-  final _matricController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,58 +38,58 @@ class _SchoolInfoPageState extends State<SchoolInfoPage> {
                   'Education',
                   style: TextStyle(fontSize: 20, letterSpacing: 1),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 MyTextField(
-                  titleController: _universityController,
+                  titleController: widget.institutionController,
                   labelText: 'Institution',
                   validator: (text) => text!.isEmpty ? 'Required' : null,
                   onSaved: (value) {
                     widget.onSaved(
                       value,
-                      _courseController.text,
-                      _levelController.text,
-                      _matricController.text,
+                      widget.courseController.text,
+                      widget.levelController.text,
+                      widget.matricController.text,
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 MyTextField(
-                  titleController: _courseController,
+                  titleController: widget.courseController,
                   labelText: 'Course',
                   validator: (text) => text!.isEmpty ? 'Required' : null,
                   onSaved: (value) {
                     widget.onSaved(
-                      _universityController.text,
+                      widget.institutionController.text,
                       value,
-                      _levelController.text,
-                      _matricController.text,
+                      widget.levelController.text,
+                      widget.matricController.text,
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 MyTextField(
-                  titleController: _levelController,
+                  titleController: widget.levelController,
                   labelText: 'Level',
                   validator: (text) => text!.isEmpty ? 'Required' : null,
                   onSaved: (value) {
                     widget.onSaved(
-                      _universityController.text,
-                      _courseController.text,
+                      widget.institutionController.text,
+                      widget.courseController.text,
                       value,
-                      _matricController.text,
+                      widget.matricController.text,
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 MyTextField(
-                  titleController: _matricController,
+                  titleController: widget.matricController,
                   labelText: 'Matric Number',
                   validator: (text) => text!.isEmpty ? 'Required' : null,
                   onSaved: (value) {
                     widget.onSaved(
-                      _universityController.text,
-                      _courseController.text,
-                      _levelController.text,
+                      widget.institutionController.text,
+                      widget.courseController.text,
+                      widget.levelController.text,
                       value,
                     );
                   },

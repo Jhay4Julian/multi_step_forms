@@ -4,20 +4,25 @@ import 'package:multi_step_forms/components/my_textfield.dart';
 
 class PersonalInfoPage extends StatefulWidget {
   final GlobalKey formKey;
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController ageController;
+  final TextEditingController genderController;
   final Function(String?, String?, String?, String?) onSaved;
   const PersonalInfoPage(
-      {super.key, required this.formKey, required this.onSaved});
+      {super.key,
+      required this.formKey,
+      required this.firstNameController,
+      required this.lastNameController,
+      required this.ageController,
+      required this.genderController,
+      required this.onSaved});
 
   @override
   State<PersonalInfoPage> createState() => _PersonalInfoPageState();
 }
 
 class _PersonalInfoPageState extends State<PersonalInfoPage> {
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _ageController = TextEditingController();
-  final _genderController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +39,9 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   'Profile',
                   style: TextStyle(fontSize: 20, letterSpacing: 1),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 MyTextField(
-                  titleController: _firstNameController,
+                  titleController: widget.firstNameController,
                   labelText: 'First Name',
                   validator: (text) {
                     if (text!.isEmpty) {
@@ -48,34 +53,34 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   onSaved: (value) {
                     widget.onSaved(
                       value,
-                      _lastNameController.text,
-                      _ageController.text,
-                      _genderController.text,
+                      widget.lastNameController.text,
+                      widget.ageController.text,
+                      widget.genderController.text,
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 MyTextField(
-                  titleController: _lastNameController,
+                  titleController: widget.lastNameController,
                   labelText: 'Last Name',
                   validator: (text) => text!.isEmpty ? 'Required' : null,
                   onSaved: (value) {
                     widget.onSaved(
-                      _firstNameController.text,
+                      widget.firstNameController.text,
                       value,
-                      _ageController.text,
-                      _genderController.text,
+                      widget.ageController.text,
+                      widget.genderController.text,
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: 80,
                       child: MyTextField(
-                        titleController: _ageController,
+                        titleController: widget.ageController,
                         labelText: 'Age',
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
@@ -83,10 +88,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                         validator: (text) => text!.isEmpty ? 'Required' : null,
                         onSaved: (value) {
                           widget.onSaved(
-                            _firstNameController.text,
-                            _lastNameController.text,
+                            widget.firstNameController.text,
+                            widget.lastNameController.text,
                             value,
-                            _genderController.text,
+                            widget.genderController.text,
                           );
                         },
                       ),
@@ -94,14 +99,14 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                     const SizedBox(width: 50),
                     Expanded(
                       child: MyTextField(
-                        titleController: _genderController,
+                        titleController: widget.genderController,
                         labelText: 'Gender',
                         validator: (text) => text!.isEmpty ? 'Required' : null,
                         onSaved: (value) {
                           widget.onSaved(
-                            _firstNameController.text,
-                            _lastNameController.text,
-                            _ageController.text,
+                            widget.firstNameController.text,
+                            widget.lastNameController.text,
+                            widget.ageController.text,
                             value,
                           );
                         },
